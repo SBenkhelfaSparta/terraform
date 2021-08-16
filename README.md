@@ -1,4 +1,7 @@
 ### Terraform
+
+![img](tera_IAC_diagram.png)
+
 ## Getting started
 After installing Terraform onto your machine, create a new folder where you will be creating a `main.tf` file. In the file write down this code:
 ```
