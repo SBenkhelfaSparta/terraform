@@ -1,7 +1,7 @@
 # Let's build a script to connect to AWS and download/setup all dependencies required
 
 provider "aws" {
-	region = "eu-west-1"
+  region = "eu-west-1"
 }
 
 # then run terraform init
@@ -11,17 +11,21 @@ provider "aws" {
 # launch an ec2 instance
 
 # keyword called "resource" provide resource name and give name with specific details to the service
-resource "aws_instance" "app_instance"{
+resource "aws_instance" "app_instance" {
 
-	key_name = "eng89_salem_ans"
-		
-	ami = "ami-038d7b856fe7557b3"
+  key_name = "eng89_salem_ans"
 
-	instance_type = "t2.micro"
+  ami = "ami-038d7b856fe7557b3"
 
-	associate_public_ip_address = true
+  instance_type = "t2.micro"
 
-	tags = {
-		Name = "eng89_salem_terraform"
-	}
+  subnet_id = aws_subnet.prod-subnet-public-1.id
+
+  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+
+  associate_public_ip_address = true
+
+  tags = {
+    Name = "eng89_salem_terraform"
+  }
 }
