@@ -28,4 +28,31 @@ resource "aws_instance" "app_instance" {
   tags = {
     Name = "eng89_salem_terraform"
   }
+
+  provisioner "file" {
+    source      = "upload/"
+    destination = "~/"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.ssh/eng89_salem_ans.pem")
+      host        = self.public_ip
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x provision.sh",
+      "sudo ./provision.sh",
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.ssh/eng89_salem_ans.pem")
+      host        = self.public_ip
+    }
+  }
+
 }
