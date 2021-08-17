@@ -23,4 +23,5 @@ cd ~/app
 
 sudo npm install -y
 
-npm start
+pm2 kill
+pm2 start app.js

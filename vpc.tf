@@ -1,6 +1,6 @@
 resource "aws_vpc" "prod-vpc" {
     cidr_block = "10.208.0.0/16"
-    instance_tenancy = "default"    
+    instance_tenancy = "default"
     
     tags = {
         Name = "eng89_salem_vpc"

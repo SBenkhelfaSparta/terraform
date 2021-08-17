@@ -4,18 +4,11 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-# then run terraform init
-
-# then launch aws services
-
-# launch an ec2 instance
-
-# keyword called "resource" provide resource name and give name with specific details to the service
 resource "aws_instance" "app_instance" {
 
   key_name = "eng89_salem_ans"
 
-  ami = "ami-038d7b856fe7557b3"
+  ami = "ami-0943382e114f188e8"
 
   instance_type = "t2.micro"
 
@@ -26,7 +19,7 @@ resource "aws_instance" "app_instance" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "eng89_salem_terraform"
+    Name = "eng89_salem_terraform3"
   }
 
   provisioner "file" {
@@ -43,8 +36,12 @@ resource "aws_instance" "app_instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x provision.sh",
-      "sudo ./provision.sh",
+      "sudo apt-get update -y",
+      "sudo apt-get install -y dos2unix",
+      "sed -i 's/replacewithip/${self.public_ip}/g' default", #replace text in file
+      "dos2unix ~/provision.sh",
+      "chmod +x ~/provision.sh",
+      "sudo ~/provision.sh"
     ]
 
     connection {
