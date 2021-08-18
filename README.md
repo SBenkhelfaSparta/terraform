@@ -26,7 +26,7 @@ If you don't already have your AWS keys saved in your environment variables, do 
 Open up terminal/cmd in the folder and run `terraform init` then `terraform plan`. If that was successful run `terraform apply` to create the instance.
 
 ## Automating Absoloutely Everything
-Here you can bunch every resource into one files, multiple files or even one file per resource. Terraform treats it all the same.
+Here you can bunch every resource into one file, multiple files or even one file per resource. Terraform treats it all the same.
 ### VPC
 ```
 resource "aws_vpc" "prod-vpc" {
